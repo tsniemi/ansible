@@ -1,27 +1,11 @@
-- name: Global installation  
-  hosts: localhost
+- hosts: localhost
   pre_tasks:
     - name: update repositories
       apt: update_cache=yes
       changed_when: False
   tasks:
-    - name: Install zsh
-      apt: name=zsh
-    - name: Change shell
-      shell: chsh -s $(which zsh)
-- name: Configure zsh
-  hosts: localhost
-  tasks:
-    - name: Install oh-my-zsh
-      shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-    - name: Get auto-suggestions plugin    
-      ansible.builtin.git:
-        repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
-        dest: '~/.oh-my-zsh/plugins/zsh-autosuggestions'
-- name: Extra
-  tasks:
-    - include: tasks/zsh.yml
     - include: tasks/core-utils.yml
+    - include: tasks/zsh.yml
     - include: tasks/dotfiles.yml
     - include: tasks/productivity.yml
 
