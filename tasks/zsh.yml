@@ -6,6 +6,7 @@
     - dotfiles
     - zsh
 - name: Change shell to zsh
+  become: false
   become_user: "{{ lookup('env', 'USER') }}"
   shell: chsh -s $(which zsh)
   tags:
@@ -14,6 +15,8 @@
     - productivity
     - zsh
 - name: Oh-My-Zsh
+  become: false
+  become_user: "{{ lookup('env', 'USER') }}"
   shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
   tags:
     - install
@@ -21,6 +24,8 @@
     - dotfiles
     - zsh
 - name: Install zsh-autosuggestions
+  become: false
+  become_user: "{{ lookup('env', 'USER') }}"
   ansible.builtin.git:
     repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
     dest: "~/.oh-my-zsh/plugins/zsh-autosuggestions"
