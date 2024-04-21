@@ -5,4 +5,4 @@ sudo apt update -y
 sudo apt install -y curl git ansible
 
 ## pull ansible
-sudo ansible-pull -U https://github.com/tsniemi/ansible.git
+sudo ansible-pull -U https://github.com/tsniemi/ansible.git -e "ansible_user=$(whoami)"

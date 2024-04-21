@@ -11,6 +11,7 @@
     - install
     - dotfiles
 - name: Stow dotfiles
+  
   shell: cd $HOME/dotfiles && make all
   tags:
     - install

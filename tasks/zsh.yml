@@ -6,18 +6,24 @@
     - dotfiles
     - zsh
 - name: Change shell to zsh
-  become: false
-  become_user: "{{ lookup('env', 'USER') }}"
-  shell: chsh -s $(which zsh)
+  user:
+    name: "{{ ansible_user }}"
+    shell: "/usr/bin/zsh"
+  become: true
   tags:
     - install
     - dotfiles
     - productivity
     - zsh
-- name: Oh-My-Zsh
-  become: false
-  become_user: "{{ lookup('env', 'USER') }}"
-  shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+- name: Download Oh My Zsh installation script
+  get_url:
+    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: /tmp/install_ohmyzsh.sh
+
+- name: Run Oh My Zsh installation script
+  command: sh /tmp/install_ohmyzsh.sh --unattended
+  register: ohmyzsh_result
+  failed_when: "'FAILED' in ohmyzsh_result.stderr"
   tags:
     - install
     - productivity
