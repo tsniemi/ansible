@@ -31,7 +31,7 @@
     - zsh
 - name: Install zsh-autosuggestions
   become: false
-  become_user: "{{ lookup('env', 'USER') }}"
+  become_user: "{{ ansible_user }}"
   ansible.builtin.git:
     repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
     dest: "~/.oh-my-zsh/plugins/zsh-autosuggestions"
