@@ -7,13 +7,13 @@
   become_user: "{{ ansible_user }}" 
   ansible.builtin.git:
     repo: 'https://github.com/tsniemi/dotfiles.git'
-    dest: "{{ lookup('env', 'HOME') }}/dotfiles"
+    dest: "/home/{{ lookup('env', 'HOME') }}/dotfiles"
   tags:
     - install
     - dotfiles
 - name: Stow dotfiles
   become_user: "{{ ansible_user }}"
-  shell: cd "{{ lookup('env', 'HOME')}}"/dotfiles && make all
+  shell: cd /home/"{{ ansible_user }}"/dotfiles && make all
   tags:
     - install
     - dotfiles

@@ -21,6 +21,7 @@
     dest: /tmp/install_ohmyzsh.sh
 
 - name: Run Oh My Zsh installation script
+  become_user: "{{ ansible_user }}"
   command: sh /tmp/install_ohmyzsh.sh --unattended
   register: ohmyzsh_result
   failed_when: "'FAILED' in ohmyzsh_result.stderr"
@@ -34,7 +35,7 @@
   become_user: "{{ ansible_user }}"
   ansible.builtin.git:
     repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
-    dest: "~/.oh-my-zsh/plugins/zsh-autosuggestions"
+    dest: "/home/'{{ ansible_user }}'/.oh-my-zsh/plugins/zsh-autosuggestions"
   tags:
     - install
     - productivity
