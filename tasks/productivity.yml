@@ -1,0 +1,11 @@
+- name: Install packages
+  apt: name={{item}}
+  with_items:
+    - tmux
+    - fzf
+    - tldr
+    - fd
+    - bat
+  tags:
+    - install
+    - productivity
