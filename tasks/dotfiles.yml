@@ -4,16 +4,18 @@
     - install
     - dotfiles
 - name: Cloning .dotfiles
+  become: true
   become_user: "{{ ansible_user }}" 
   ansible.builtin.git:
     repo: 'https://github.com/tsniemi/dotfiles.git'
-    dest: "/home/{{ lookup('env', 'HOME') }}/dotfiles"
+    dest: "/home/{{ ansible_user }}/dotfiles"
   tags:
     - install
     - dotfiles
 - name: Stow dotfiles
+  become: true
   become_user: "{{ ansible_user }}"
-  shell: cd /home/"{{ ansible_user }}"/dotfiles && make all
+  shell: "cd /home/{{ ansible_user }}/dotfiles && make all"
   tags:
     - install
     - dotfiles
