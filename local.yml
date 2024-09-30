@@ -4,8 +4,8 @@
       apt: update_cache=yes
       changed_when: False
   tasks:
-    - include: tasks/core-utils.yml
-    - include: tasks/zsh.yml
-    - include: tasks/dotfiles.yml
-    - include: tasks/productivity.yml
+    - include_tasks: tasks/core-utils.yml
+    - include_tasks: tasks/zsh.yml
+    - include_tasks: tasks/dotfiles.yml
+    - include_tasks: tasks/productivity.yml
 
